@@ -20,17 +20,15 @@ interface MarkdownPreviewProps {
 }
 
 export default function MarkdownPreview({ content }: MarkdownPreviewProps) {
-  // Highlight code blocks when content changes
   useEffect(() => {
     Prism.highlightAll();
   }, [content]);
 
   return (
-    <div className="prose prose-invert prose-slate max-w-none p-4 bg-slate-900">
+    <div className="prose prose-invert prose-slate max-w-none p-4 bg-slate-900" style={{ minHeight: 'auto' }}>
       <ReactMarkdown 
         remarkPlugins={[remarkGfm]}
         components={{
-          // Custom styling for different elements
           h1: ({ children }) => (
             <h1 className="text-2xl font-bold text-white mb-4 mt-6 first:mt-0">
               {children}
@@ -86,7 +84,6 @@ export default function MarkdownPreview({ content }: MarkdownPreviewProps) {
               );
             }
             
-            // Extract language from className (format: language-{lang})
             const language = className?.replace('language-', '') || '';
             
             return (

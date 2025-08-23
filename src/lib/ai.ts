@@ -63,7 +63,7 @@ export class APIAIService implements AIService {
       return data.improved || content;
     } catch (error) {
       console.error('Content improvement failed:', error);
-      return content; // Return original content if improvement fails
+      return content;
     }
   }
   async generateSuggestions(content: string): Promise<Array<{title: string, content: string, position: string}>> {

@@ -44,11 +44,10 @@ export default function NoteApp() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-900 flex">
+    <div className="bg-slate-900 flex h-screen">
       <NoteSidebar />
       <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Header banner */}
-        <div className="bg-slate-800 border-b border-slate-700 p-3">
+        <div className="bg-slate-800 border-b border-slate-700 p-3 flex-shrink-0">
           <div className="flex items-center justify-between">
             {!user ? (
               <>
@@ -77,7 +76,32 @@ export default function NoteApp() {
             )}
           </div>
         </div>
-        <NoteEditor />
+
+        <div className="flex-1 overflow-hidden">
+          <NoteEditor />
+        </div>
+
+        <div className="flex-shrink-0 border-t border-slate-700 p-4 bg-slate-800">
+          <div className="flex items-center justify-between text-sm text-slate-400">
+            <div>
+              <span className="mr-4">
+                Characters: {useNoteStore.getState().currentNote?.content?.length || 0}
+              </span>
+              <span>
+                Words: {useNoteStore.getState().currentNote?.content?.split(/\s+/).filter(word => word.length > 0).length || 0}
+              </span>
+            </div>
+            <div className="flex items-center space-x-4">
+              <span>Preview Mode</span>
+              <button className="px-3 py-1 bg-indigo-600 text-white rounded text-xs hover:bg-indigo-700 transition-colors">
+                Save
+              </button>
+              <button className="px-3 py-1 bg-red-600 text-white rounded text-xs hover:bg-red-700 transition-colors">
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

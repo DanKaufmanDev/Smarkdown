@@ -2,7 +2,6 @@ import { supabase } from './supabaseClient';
 import { notes } from './types';
 
 export const notesService = {
-  // Get all notes for the current user
   async getNotes(): Promise<notes[]> {
     const { data, error } = await supabase
       .from('notes')
@@ -13,7 +12,6 @@ export const notesService = {
     return data || [];
   },
 
-  // Get a single note by ID
   async getNote(id: string): Promise<notes | null> {
     const { data, error } = await supabase
       .from('notes')
@@ -25,9 +23,7 @@ export const notesService = {
     return data;
   },
 
-  // Create a new note
   async createNote(note: Partial<notes>): Promise<notes> {
-    // Get the current user's ID
     const { data: { user } } = await supabase.auth.getUser();
     
     if (!user) {
@@ -44,7 +40,6 @@ export const notesService = {
     return data;
   },
 
-  // Update an existing note
   async updateNote(id: string, updates: Partial<notes>): Promise<notes> {
     const { data, error } = await supabase
       .from('notes')
@@ -57,7 +52,6 @@ export const notesService = {
     return data;
   },
 
-  // Delete a note
   async deleteNote(id: string): Promise<void> {
     const { error } = await supabase
       .from('notes')
@@ -67,7 +61,6 @@ export const notesService = {
     if (error) throw error;
   },
 
-  // Search notes by title or content
   async searchNotes(query: string): Promise<notes[]> {
     const { data, error } = await supabase
       .from('notes')
@@ -79,7 +72,6 @@ export const notesService = {
     return data || [];
   },
 
-  // Get notes by tag
   async getNotesByTag(tag: string): Promise<notes[]> {
     const { data, error } = await supabase
       .from('notes')

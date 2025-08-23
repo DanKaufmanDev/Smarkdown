@@ -25,8 +25,7 @@ export default function NoteSidebar() {
   };
 
   return (
-    <div className="w-80 bg-slate-800 border-r border-slate-700 flex flex-col">
-      {/* Search and New Note */}
+    <div className="w-80 bg-slate-800 border-r border-slate-700 flex flex-col h-screen overflow-scroll">
       <div className="p-4 border-b border-slate-700">
         <div className="flex space-x-2 mb-4">
           <input
@@ -46,7 +45,6 @@ export default function NoteSidebar() {
         </button>
       </div>
 
-      {/* Notes List */}
       <div className="flex-1 overflow-y-auto">
         {isLoading ? (
           <div className="p-4 text-center text-slate-400">

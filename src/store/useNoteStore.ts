@@ -47,6 +47,7 @@ type State = {
     generateSuggestions: () => Promise<void>;
     findRelatedNotes: () => Promise<void>;
     clearAISuggestions: () => void;
+    declineSuggestion: (index: number) => void;
     clearRelatedNotes: () => void;
     clearSummary: () => void;
     applySuggestion: (suggestion: {title: string, content: string, position: string}) => void;
@@ -224,7 +225,6 @@ export const useNoteStore = create<State>((set, get) => ({
                 set({ error: (error as Error).message, isLoading: false });
             }
         } else {
-            // Search locally
             if (!query.trim()) {
                 if (typeof window !== 'undefined') {
                     const notes = loadFromLocal();
@@ -351,6 +351,13 @@ export const useNoteStore = create<State>((set, get) => ({
     },
 
     clearAISuggestions: () => set({ aiSuggestions: [] }),
+
+    declineSuggestion: (index: number) => {
+        const { aiSuggestions } = get();
+        const updated = aiSuggestions.filter((_, i) => i !== index);
+        set({ aiSuggestions: updated });
+    },
+
     clearRelatedNotes: () => set({ relatedNotes: [] }),
     clearSummary: () => set({ summary: null }),
     
