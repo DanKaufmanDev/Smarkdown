@@ -2,7 +2,7 @@
 
 Smarkdown is a modern markdown note-taking application designed for users who want to streamline their writing and organization process. It combines a clean, intuitive interface with a powerful suite of AI-powered tools to help you write better, faster, and more efficiently. Whether you're a student, a writer, or a developer, Smarkdown provides the features you need to capture your ideas and organize your thoughts.
 
-![Smarkdown Screenshot](https://i.imgur.com/your-screenshot.png)
+![Smarkdown Screenshot](https://imgur.com/LuXKddd.png)
 
 ## Features
 
