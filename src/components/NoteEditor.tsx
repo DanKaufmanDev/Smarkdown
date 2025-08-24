@@ -182,6 +182,7 @@ export default function NoteEditor() {
 
   return (
     <div className="h-full flex flex-col bg-slate-900 overflow-hidden">
+      {/* Fixed Headers */}
       <div className="flex-shrink-0">
         <div className="border-b border-slate-700 p-4">
           <div className="flex items-center justify-between">
@@ -255,12 +256,52 @@ export default function NoteEditor() {
           </div>
         </div>
       </div>
-      <div className="flex-1 flex flex-col overflow-hidden">
+
+      {/* Flexible middle section */}
+      <div className="flex-1 flex flex-col overflow-hidden min-h-0">
+        {/* Content Area */}
         <div className="flex-1 overflow-hidden min-h-0">
           {renderContent()}
         </div>
-        <div className="flex-shrink-0 border-t border-slate-700 bg-slate-800 overflow-y-auto" style={{ minHeight: '80px', maxHeight: '50vh' }}>
+
+        {/* AI Tools */}
+        <div className="flex-shrink-0 border-t border-slate-700 bg-slate-800 overflow-y-auto" style={{ minHeight: '80px', maxHeight: '40vh' }}>
           <AITools />
+        </div>
+      </div>
+
+      {/* Footer - Back in NoteEditor */}
+      <div className="flex-shrink-0 border-t border-slate-700 p-4 bg-slate-800">
+        <div className="flex items-center justify-between text-sm text-slate-400">
+          <div>
+            <span className="mr-4">
+              Characters: {currentNote.content?.length || 0}
+            </span>
+            <span>
+              Words: {currentNote.content?.split(/\s+/).filter(word => word.length > 0).length || 0}
+            </span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <span>
+              {viewMode === 'preview' ? 'Preview Mode' : 
+               viewMode === 'split' ? 'Split View' : 'Markdown'}
+            </span>
+            <button
+              onClick={saveNote}
+              disabled={isSaving}
+              className="px-3 py-1 bg-indigo-600 text-white rounded text-xs hover:bg-indigo-700 disabled:opacity-50 transition-colors"
+            >
+              {isSaving ? 'Saving...' : 'Save'}
+            </button>
+            <button
+              onClick={handleDeleteNote}
+              disabled={!currentNote?.id}
+              className="px-3 py-1 bg-red-600 text-white rounded text-xs hover:bg-red-700 disabled:opacity-50 transition-colors"
+              title="Delete this note"
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     </div>
